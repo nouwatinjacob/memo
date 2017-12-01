@@ -19,12 +19,6 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/home') }}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/create') }}">Create</a>
-      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     <li class="nav-item" id="logout">
@@ -41,3 +35,36 @@
     </ul>
   </div>
 </nav>
+<div class="container">
+  <div class="row">
+  <legend>Reminders</legend>
+  @if(session('info'))
+    <div class="alert alert-success">
+    {{ session('info') }}
+    </div>
+  @endif
+  <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if(count ($reminders) > 0)
+      @foreach($reminders->all() as $reminder)
+        <tr>
+          <td>{{ $reminder->title }}</td>
+          <td>{{ $reminder->description }}</td>
+          <td>
+            <a href='{{ url("/reads/{$reminder->id}") }}' class="badge badge-info">Read</a>
+          </td>
+        </tr>
+      @endforeach
+    @endif
+  </tbody>
+</table> 
+  </div>
+</div>
+@include('inc.footer')
