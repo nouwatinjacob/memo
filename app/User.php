@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Reminder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function is_admin(){
+        if($this->admin){
+            return true;
+        }
+        return false;
+    }
+
 }
